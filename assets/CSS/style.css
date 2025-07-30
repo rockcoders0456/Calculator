@@ -1,0 +1,344 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+    animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    }
+    25% { 
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #667eea 100%);
+    }
+    50% { 
+        background: linear-gradient(135deg, #f5576c 0%, #667eea 50%, #764ba2 100%);
+    }
+    75% { 
+        background: linear-gradient(135deg, #764ba2 0%, #f093fb 50%, #f5576c 100%);
+    }
+}
+
+/* Animated background particles */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(180deg) scale(1.1); 
+        opacity: 1;
+    }
+}
+
+.calculator{
+    width: 550px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: visible;
+}
+
+/* Remove complex pseudo-elements */
+.calculator::before {
+    display: none;
+}
+
+.calculator::after {
+    display: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+.display{
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 8px;
+    margin-bottom: 20px;
+    box-shadow: 
+        inset 0 3px 6px rgba(0, 0, 0, 0.5),
+        0 2px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: visible;
+    animation: displaySlide 1s ease-out;
+}
+
+@keyframes displaySlide {
+    from { 
+        opacity: 0; 
+        transform: translateY(-20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.display input{
+    width: 100%;
+    padding: 15px 10px;
+    border: none;
+    outline: none;
+    font-size: 2.5rem;
+    font-weight: 300;
+    background: transparent;
+    color: #ffffff;
+    text-align: right;
+    border-radius: 12px;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    overflow: scroll;
+}
+
+.display input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    animation: placeholderPulse 2s ease-in-out infinite;
+}
+
+@keyframes placeholderPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+}
+
+.btn-row, .btn-row2 {
+    margin-bottom: 15px;
+    animation: buttonsSlide 1s ease-out 0.3s both;
+}
+
+@keyframes buttonsSlide {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Restore beautiful styling while keeping buttons functional */
+.calculator .btn {
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    color: #ffffff;
+    margin: 5px 0;
+    z-index: 10;
+    pointer-events: auto;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+}
+
+.calculator .btn:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.3));
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.calculator .btn:active {
+    transform: translateY(0px);
+}
+
+/* Operator buttons */
+.calculator .btn[id*="btn-plus"], 
+.calculator .btn[id*="btn-minus"], 
+.calculator .btn[id*="btn-multiply"], 
+.calculator .btn[id*="btn-divide"] {
+    background: linear-gradient(145deg, #FF6B6B, #FF5252);
+    box-shadow: 
+        0 6px 12px rgba(255, 107, 107, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.calculator .btn[id*="btn-plus"]:hover, 
+.calculator .btn[id*="btn-minus"]:hover, 
+.calculator .btn[id*="btn-multiply"]:hover, 
+.calculator .btn[id*="btn-divide"]:hover {
+    background: linear-gradient(145deg, #FF7B7B, #FF6262);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(255, 107, 107, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Special buttons */
+.calculator .btn[id*="btn-clear"] {
+    background: linear-gradient(145deg, #FF4757, #FF3742);
+    box-shadow: 
+        0 6px 12px rgba(255, 71, 87, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.calculator .btn[id*="btn-clear"]:hover {
+    background: linear-gradient(145deg, #FF5757, #FF4742);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(255, 71, 87, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.calculator .btn[id*="btn-delete"] {
+    background: linear-gradient(145deg, #FFA502, #FF9500);
+    box-shadow: 
+        0 6px 12px rgba(255, 165, 2, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.calculator .btn[id*="btn-delete"]:hover {
+    background: linear-gradient(145deg, #FFB502, #FFA500);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(255, 165, 2, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.calculator .btn[id*="btn-equals"] {
+    background: linear-gradient(145deg, #2ED573, #1E9B5E);
+    box-shadow: 
+        0 6px 12px rgba(46, 213, 115, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.calculator .btn[id*="btn-equals"]:hover {
+    background: linear-gradient(145deg, #3ED573, #2E9B5E);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px rgba(46, 213, 115, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Button press animation */
+@keyframes buttonPress {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+/* Glow effect on focus */
+.btn:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 4px rgba(255, 255, 255, 0.4),
+        0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .calculator {
+        width: 90vw;
+        padding: 20px;
+    }
+    
+    .display input {
+        font-size: 2rem;
+        padding: 12px 8px;
+    }
+    
+    .btn {
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Smooth transitions for all elements */
+* {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Disable all transitions temporarily to fix button clicks */
+* {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Remove all pseudo-elements from calculator buttons */
+.calculator .btn::before,
+.calculator .btn::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Ensure calculator container doesn't block clicks */
+.calculator {
+    pointer-events: auto !important;
+    z-index: 1 !important;
+}
+
+.calculator * {
+    pointer-events: auto !important;
+}
